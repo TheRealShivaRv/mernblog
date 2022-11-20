@@ -1,11 +1,17 @@
 import { FC } from "react";
+import styles from "./Footer.module.scss";
+const footerText = () => {
+  const currentYear = new Date().getFullYear();
+  return `Copyright © ${currentYear} The Mernblog Co.`;
+};
 
 const Footer: FC = () => {
-    return(
-        <h1>
-            Footer Goes here!
-        </h1>
-    );
+  return (
+    <div className={styles["footer"]}>
+      {footerText()}
+      <div>Built Using:- MySQL React.js Express.js</div>
+    </div>
+  );
 };
 
 export default Footer;
