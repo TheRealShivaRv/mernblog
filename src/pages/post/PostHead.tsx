@@ -1,31 +1,29 @@
 import { FC } from "react";
 import Grid2 from "@mui/material/Unstable_Grid2";
+import { common_date_generator } from "../../utils";
 
-type CommonDate = { day: number; month: number; year: number };
+type PostHeadProps = {
+  id: number;
+  title: string;
+  date: Date | string;
+  author: string;
+  category: string | string[];
+  thumbnail: string;
+};
 
-const common_date_generator = (date: CommonDate) =>
-  new Date(date.year, date.month, date.day).toDateString().slice(4);
-
-const PostHead: FC = () => {
-  const writer = "Donald Biden";
-  const testDate = {
-    day: 25,
-    month: 9,
-    year: 2021,
-  };
-
+const PostHead: FC<PostHeadProps> = (props) => {
   return (
     <Grid2 container style={{ margin: "30px 0px" }}>
       <Grid2 xs={6} md={3}>
-        <img src="#" width="320" height="240" />
+        <img src={props.thumbnail} width="320" height="240" />
       </Grid2>
       <Grid2 xs={6} md={9}>
-        <h1>Post Title</h1>
+        <h1>{props.title}</h1>
         <p>
-          <span>Written by:- {writer} </span> <br />
-          <span>Published On:- {common_date_generator(testDate)}</span>
+          <span>Written by:- {props.author}</span> <br />
+          <span>Published On:- {common_date_generator(props.date)}</span>
           <br />
-          <span>Category:- News</span>
+          <span>Category:- {props.category}</span>
         </p>
       </Grid2>
     </Grid2>

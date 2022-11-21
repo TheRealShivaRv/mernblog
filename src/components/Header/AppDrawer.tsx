@@ -5,11 +5,13 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-
-const pages = ["Products", "Pricing", "Blog"];
+import { HeaderLink } from "../../declarations";
+import HeaderLinks from "./HeaderLinks";
+import { useNavigate } from "react-router";
 
 const AppDrawer: FC = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -17,6 +19,11 @@ const AppDrawer: FC = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const linkHandler = (url: string) => {
+    handleCloseNavMenu();
+    navigate(url)
   };
 
   return (
@@ -49,9 +56,9 @@ const AppDrawer: FC = () => {
           display: { xs: "block", md: "none" },
         }}
       >
-        {pages.map((page) => (
-          <MenuItem key={page} onClick={handleCloseNavMenu}>
-            <Typography textAlign="center">{page}</Typography>
+        {HeaderLinks.map((link: HeaderLink) => (
+          <MenuItem key={link.id} onClick={linkHandler.bind(null, link.link)}>
+            <Typography textAlign="center">{link.label}</Typography>
           </MenuItem>
         ))}
       </Menu>
